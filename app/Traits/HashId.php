@@ -6,8 +6,13 @@ use Hashids;
 
 trait HashId
 {
-    public function getIdAttribute($value)
+    /**
+     * Get the Hash Id for the user.
+     *
+     * @return bool
+     */
+    public function getHashIdAttribute()
     {
-        return $this->attributes['id'] = Hashids::encode($value);
+        return Hashids::encode($this->attributes['id']);
     }
 }

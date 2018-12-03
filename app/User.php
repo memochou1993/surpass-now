@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'sex', 'age', 'height', 'weight', 'email', 'password',
     ];
 
     /**
@@ -29,4 +29,51 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['hash_id'];
+
+    /**
+     * The categories that belong to the user.
+     *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    /**
+     * The units that belong to the user.
+     *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
+
+    /**
+     * The items that belong to the user.
+     *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    /**
+     * The records that belong to the user.
+     *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function records()
+    {
+        return $this->belongsToMany(Item::class, 'records')->withPivot(['frequency', 'unit', 'completed'])->withTimestamps();
+    }
 }
