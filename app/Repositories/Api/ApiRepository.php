@@ -34,10 +34,10 @@ class ApiRepository extends Repository
     {
         parent::__construct();
 
-        $this->user = (! App::environment('local')) ? Auth::user() : User::find(config('seeds.users.id'));
+        $this->user = App::environment('local') ? User::find(config('seeds.users.id')) : Auth::user();
 
-        $this->with = (! Request::input('with')) ? null : explode(',', Request::input('with'));
+        $this->with = Request::input('with') ? explode(',', Request::input('with')) : null;
 
-        $this->per_page = (int) Request::input('per_page');
+        $this->per_page = Request::input('per_page');
     }
 }
