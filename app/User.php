@@ -38,7 +38,7 @@ class User extends Authenticatable
     protected $appends = ['hash_id'];
 
     /**
-     * The categories that belong to the user.
+     * Get all of the categories for the user.
      *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -48,7 +48,7 @@ class User extends Authenticatable
     }
 
     /**
-     * The units that belong to the user.
+     * Get all of the units for the user.
      *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -58,7 +58,7 @@ class User extends Authenticatable
     }
 
     /**
-     * The items that belong to the user.
+     * Get all of the items for the user.
      *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

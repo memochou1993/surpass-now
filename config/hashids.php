@@ -40,7 +40,7 @@ return [
     'connections' => [
 
         'main' => [
-            'salt' => env('APP_KEY', 'Laravel'),
+            'salt' => env('APP_KEY'),
             'length' => 5,
         ],
 

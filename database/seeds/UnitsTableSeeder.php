@@ -13,7 +13,7 @@ class UnitsTableSeeder extends Seeder
     public function run()
     {
         Unit::create([
-            'name' => config('seeds.categories.name'),
+            'name' => config('seeds.units.name'),
             'user_id' => config('seeds.users.id'),
         ]);
 

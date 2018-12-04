@@ -12,4 +12,21 @@ class Record extends Model
      * @var string
      */
     protected $table = 'records';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'frequency', 'unit', 'completed',
+    ];
+
+    /**
+     * Get the user that owns the record.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
