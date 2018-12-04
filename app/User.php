@@ -2,15 +2,15 @@
 
 namespace App;
 
-use App\Traits\HashId;
+use App\Traits\ModelTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use ModelTrait;
     use Notifiable;
-    use HashId;
 
     /**
      * The attributes that are mass assignable.
@@ -35,7 +35,25 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = ['hash_id'];
+    protected $appends = [
+        'hash_id',
+    ];
+
+    /**
+     * Convert the model instance to an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $attributes = $this->attributesToArray();
+        $attributes = array_merge($attributes, $this->relationsToArray());
+
+        unset($attributes['pivot']['item_id']);
+        unset($attributes['pivot']['user_id']);
+
+        return $attributes;
+    }
 
     /**
      * Get all of the categories for the user.

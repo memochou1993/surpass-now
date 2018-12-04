@@ -15,4 +15,6 @@ use Illuminate\Http\Request;
 
 Route::prefix('/users/me')->group(function () {
     Route::get('/', 'UserController@show');
+    Route::resource('/items', 'ItemController')
+         ->only(['index', 'show']);
 });

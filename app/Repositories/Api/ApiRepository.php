@@ -38,6 +38,6 @@ class ApiRepository extends Repository
 
         $this->with = Request::input('with') ? explode(',', Request::input('with')) : null;
 
-        $this->per_page = Request::input('per_page');
+        $this->per_page = (int) Request::input('per_page');
     }
 }
