@@ -53,7 +53,7 @@ class ItemController extends ApiController
         }
 
         try {
-            return new Resource($this->repository->getAllUserItems());
+            return new Resource($this->repository->getAllItems());
         } catch (Exception $e) {
             return Response::error($e->getMessage());
         }
@@ -62,11 +62,19 @@ class ItemController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  string  $item_key
+     * @param  string  $hash_id
      * @return \App\Http\Resources\Resource
      */
-    public function show($item_key)
+    public function show($hash_id)
     {
-        //
+        if ($this->errors) {
+            return Response::fail($this->errors);
+        }
+
+        try {
+            return Response::success($this->repository->getItem($hash_id));
+        } catch (Exception $e) {
+            return Response::error($e->getMessage());
+        }
     }
 }
