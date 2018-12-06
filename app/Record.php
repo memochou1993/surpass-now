@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Request;
 use App\Traits\ModelTrait;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Record extends Model
@@ -33,6 +35,26 @@ class Record extends Model
     protected $appends = [
         'hash_id',
     ];
+
+    /**
+     * 
+     *
+     * 
+     */
+    public function getCreatedAtAttribute()
+    {
+        return Request::input('time') == 'diffForHumans' ? Carbon::parse($this->pivot->created_at)->diffForHumans() : $this->pivot->created_at;
+    }
+
+    /**
+     * 
+     *
+     * 
+     */
+    public function getUpdatedAtAttribute()
+    {
+        return Request::input('time') == 'diffForHumans' ? Carbon::parse($this->pivot->updated_at)->diffForHumans() : $this->pivot->updated_at;
+    }
 
     /**
      * Get the user that owns the record.

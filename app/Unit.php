@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Request;
 use App\Traits\ModelTrait;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Unit extends Model
@@ -26,6 +28,26 @@ class Unit extends Model
     protected $appends = [
         'hash_id',
     ];
+
+    /**
+     *
+     *
+     *
+     */
+    public function getCreatedAtAttribute($value)
+    {
+        return Request::input('time') == 'diffForHumans' ? Carbon::parse($value)->diffForHumans() : $value;
+    }
+
+    /**
+     *
+     *
+     *
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return Request::input('time') == 'diffForHumans' ? Carbon::parse($value)->diffForHumans() : $value;
+    }
 
     /**
      * Get the user that owns the unit.

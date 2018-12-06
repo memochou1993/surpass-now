@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Request;
 use App\Traits\ModelTrait;
+use Illuminate\Support\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,6 +40,26 @@ class User extends Authenticatable
     protected $appends = [
         'hash_id',
     ];
+
+    /**
+     *
+     *
+     *
+     */
+    public function getCreatedAtAttribute($value)
+    {
+        return Request::input('time') == 'diffForHumans' ? Carbon::parse($value)->diffForHumans() : $value;
+    }
+
+    /**
+     *
+     *
+     *
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return Request::input('time') == 'diffForHumans' ? Carbon::parse($value)->diffForHumans() : $value;
+    }
 
     /**
      * Get all of the categories for the user.
@@ -76,6 +98,6 @@ class User extends Authenticatable
      */
     public function records()
     {
-        return $this->belongsToMany(Item::class, 'records')->withPivot(['frequency', 'unit', 'completed'])->withTimestamps();
+        return $this->belongsToMany(Item::class, 'records')->withPivot(['id', 'frequency', 'unit', 'completed'])->withTimestamps();
     }
 }

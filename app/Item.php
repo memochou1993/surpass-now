@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Request;
 use App\Traits\ModelTrait;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
@@ -28,6 +30,26 @@ class Item extends Model
     ];
 
     /**
+     *
+     *
+     *
+     */
+    public function getCreatedAtAttribute($value)
+    {
+        return Request::input('time') == 'diffForHumans' ? Carbon::parse($value)->diffForHumans() : $value;
+    }
+
+    /**
+     *
+     *
+     *
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return Request::input('time') == 'diffForHumans' ? Carbon::parse($value)->diffForHumans() : $value;
+    }
+
+    /**
      * Get the user that owns the item.
      */
     public function user()
@@ -50,6 +72,6 @@ class Item extends Model
      */
     public function records()
     {
-        return $this->belongsToMany(User::class, 'records')->withPivot(['frequency', 'unit', 'completed'])->withTimestamps();
+        return $this->belongsToMany(User::class, 'records')->withPivot(['id', 'frequency', 'unit', 'completed'])->withTimestamps();
     }
 }

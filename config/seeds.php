@@ -36,7 +36,7 @@ return [
 
     'units' => [
         'id' => 1,
-        'name' => '次',
+        'name' => 'Test Unit',
     ],
 
     'records' => [
