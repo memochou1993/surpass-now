@@ -13,8 +13,8 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         Category::create([
-            'name' => config('seeds.categories.name'),
             'user_id' => config('seeds.users.id'),
+            'name' => config('seeds.categories.name'),
         ]);
 
         factory(Category::class, config('factories.category.number'))->create();

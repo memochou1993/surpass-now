@@ -40,22 +40,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * Convert the model instance to an array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $attributes = $this->attributesToArray();
-        $attributes = array_merge($attributes, $this->relationsToArray());
-
-        unset($attributes['pivot']['item_id']);
-        unset($attributes['pivot']['user_id']);
-
-        return $attributes;
-    }
-
-    /**
      * Get all of the categories for the user.
      *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -66,16 +50,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Get all of the units for the user.
-     *
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function units()
-    {
-        return $this->hasMany(Unit::class);
-    }
-
-    /**
      * Get all of the items for the user.
      *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -83,6 +57,16 @@ class User extends Authenticatable
     public function items()
     {
         return $this->hasMany(Item::class);
+    }
+
+    /**
+     * Get all of the units for the user.
+     *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
     }
 
     /**

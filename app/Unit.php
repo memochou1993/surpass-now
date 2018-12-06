@@ -19,15 +19,6 @@ class Unit extends Model
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'user_id',
-    ];
-
-    /**
      * The accessors to append to the model's array form.
      *
      * @var array

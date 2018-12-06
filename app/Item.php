@@ -19,15 +19,6 @@ class Item extends Model
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'category_id', 'user_id',
-    ];
-
-    /**
      * The accessors to append to the model's array form.
      *
      * @var array
@@ -37,19 +28,11 @@ class Item extends Model
     ];
 
     /**
-     * Convert the model instance to an array.
-     *
-     * @return array
+     * Get the user that owns the item.
      */
-    public function toArray()
+    public function user()
     {
-        $attributes = $this->attributesToArray();
-        $attributes = array_merge($attributes, $this->relationsToArray());
-
-        unset($attributes['pivot']['user_id']);
-        unset($attributes['pivot']['item_id']);
-
-        return $attributes;
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -58,14 +41,6 @@ class Item extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
-    }
-
-    /**
-     * Get the user that owns the item.
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     /**

@@ -15,13 +15,13 @@ class CreateRecordsTable extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('frequency');
-            $table->string('unit');
-            $table->boolean('completed')->default(false);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('item_id')->unsigned();
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            $table->float('frequency');
+            $table->string('unit');
+            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }

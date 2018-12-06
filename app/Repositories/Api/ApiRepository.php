@@ -18,11 +18,6 @@ class ApiRepository extends Repository
     /**
      *
      */
-    protected $relation;
-
-    /**
-     *
-     */
     protected $per_page;
 
     /**
@@ -35,8 +30,6 @@ class ApiRepository extends Repository
         parent::__construct();
 
         $this->user = App::environment('local') ? User::find(config('seeds.users.id')) : Auth::user();
-
-        $this->relation = Request::input('relation') ? explode(',', Request::input('relation')) : null;
 
         $this->per_page = (int) Request::input('per_page');
     }

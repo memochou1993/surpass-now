@@ -13,9 +13,9 @@ class ItemsTableSeeder extends Seeder
     public function run()
     {
         Item::create([
-            'name' => config('seeds.items.name'),
             'category_id' => config('seeds.categories.id'),
             'user_id' => config('seeds.users.id'),
+            'name' => config('seeds.items.name'),
         ]);
 
         factory(Item::class, config('factories.item.number'))->create();

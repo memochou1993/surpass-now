@@ -6,7 +6,7 @@ use Response;
 use Exception;
 use App\Http\Requests\Api\ItemRequest as Request;
 use App\Contracts\Api\ItemInterface as Repository;
-use App\Http\Resources\Api\ItemCollection as Resource;
+use App\Http\Resources\Api\ItemResource as Resource;
 
 class ItemController extends ApiController
 {
@@ -53,7 +53,7 @@ class ItemController extends ApiController
         }
 
         try {
-            return new Resource($this->repository->getAllItems());
+            return Resource::collection($this->repository->getAllItems());
         } catch (Exception $e) {
             return Response::error($e->getMessage());
         }
@@ -72,7 +72,7 @@ class ItemController extends ApiController
         }
 
         try {
-            return Response::success($this->repository->getItem($hash_id));
+            return new Resource($this->repository->getItem($hash_id));
         } catch (Exception $e) {
             return Response::error($e->getMessage());
         }

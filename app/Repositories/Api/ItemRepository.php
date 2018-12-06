@@ -32,13 +32,7 @@ class ItemRepository extends ApiRepository implements ItemInterface
      */
     public function getAllItems()
     {
-        $items = $this->user->items();
-
-        if ($this->relation) {
-            $items->with($this->relation);
-        }
-
-        return $items->paginate($this->per_page);
+        return $this->user->items()->with(['category'])->paginate($this->per_page);
     }
 
     /**
@@ -49,9 +43,7 @@ class ItemRepository extends ApiRepository implements ItemInterface
     public function getItem($hash_id)
     {
         $id = Hashids::decode($hash_id);
-
-        $item = $this->relation ? $this->item->with($this->relation) : $this->item;
-
-        return $item->find($id);
+        
+        return $this->item->with(['category'])->find($id);
     }
 }
